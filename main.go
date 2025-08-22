@@ -43,7 +43,8 @@ func PostBioskop(c *gin.Context) {
 
 	err = db.QueryRow(query, input.Nama, input.Lokasi, input.Rating).Scan(&input.ID)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Gagal menambahkan data"})
+		log.Printf("Insert error: %v", err) // log error asli ke console
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -187,17 +188,11 @@ func main() {
 	//delete
 	router.DELETE("/bioskop/:id", DeleteBioskop)
 
-	port := os.Getenv("PGPORT")
+	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
 	fmt.Printf("\nServer running di: http://localhost:%s ...\n", port)
 	router.Run(":" + port)
-	// port := os.Getenv("PORT")
-	// if port == "" {
-	// 	port = "8080"
-	// }
-	// fmt.Printf("\nServer running di: http://localhost:%s ...\n", port)
-	// router.Run(":" + port)
 
 }
