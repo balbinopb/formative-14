@@ -54,9 +54,11 @@ func PostBioskop(c *gin.Context) {
 func GetAllBioskop(c *gin.Context) {
 	rows, err := db.Query("SELECT id, nama, lokasi, rating FROM bioskop_db")
 	if err != nil {
+		log.Printf("SQL error: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Gagal mengambil data"})
 		return
 	}
+
 	defer rows.Close()
 
 	var bioskops []Bioskop
