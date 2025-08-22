@@ -141,7 +141,7 @@ func DeleteBioskop(c *gin.Context) {
 func main() {
 
 	if _, exists := os.LookupEnv("RAILWAY_ENVIRONMENT"); !exists {
-		_ = godotenv.Load() 
+		_ = godotenv.Load()
 	}
 
 	connStr := fmt.Sprintf(
@@ -154,7 +154,8 @@ func main() {
 	db, err = sql.Open("postgres", connStr)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Printf("Gagal koneksi DB: %v", err)
+		return
 	}
 
 	err = db.Ping()
@@ -180,11 +181,11 @@ func main() {
 	//delete
 	router.DELETE("/bioskop/:id", DeleteBioskop)
 
-	port := os.Getenv("PORT")
-    if port == "" {
-        port = "8080"
-    }
-	fmt.Println("\nServer running di: http://localhost:8080 ...")
-	router.Run(":"+port)
+	port := os.Getenv("PGPORT")
+	if port == "" {
+		port = "8080"
+	}
+	fmt.Printf("\nServer running di: http://localhost:%s ...\n", port)
+	router.Run(":" + port)
 
 }
