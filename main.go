@@ -183,7 +183,7 @@ func main() {
 	//delete
 	router.DELETE("/bioskop/:id", DeleteBioskop)
 
-	port := os.Getenv("PGPORT")
+	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
