@@ -146,8 +146,12 @@ func main() {
 		_ = godotenv.Load()
 	}
 
+	// connStr := fmt.Sprintf(
+	// 	"host=%s port=%s user=%s password=%s dbname=%s sslmode=require",
+	// 	os.Getenv("PGHOST"), os.Getenv("PGPORT"), os.Getenv("PGUSER"), os.Getenv("PGPASSWORD"), os.Getenv("PGDATABASE"),
+	// )
 	connStr := fmt.Sprintf(
-		"host=%s port=%s user=%s password=%s dbname=%s sslmode=require",
+		"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		os.Getenv("PGHOST"), os.Getenv("PGPORT"), os.Getenv("PGUSER"), os.Getenv("PGPASSWORD"), os.Getenv("PGDATABASE"),
 	)
 
