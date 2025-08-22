@@ -187,17 +187,17 @@ func main() {
 	//delete
 	router.DELETE("/bioskop/:id", DeleteBioskop)
 
+	port := os.Getenv("PGPORT")
+	if port == "" {
+		port = "8080"
+	}
+	fmt.Printf("\nServer running di: http://localhost:%s ...\n", port)
+	router.Run(":" + port)
 	// port := os.Getenv("PORT")
 	// if port == "" {
 	// 	port = "8080"
 	// }
 	// fmt.Printf("\nServer running di: http://localhost:%s ...\n", port)
 	// router.Run(":" + port)
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
-	fmt.Printf("\nServer running di: http://localhost:%s ...\n", port)
-	router.Run(":" + port)
 
 }
