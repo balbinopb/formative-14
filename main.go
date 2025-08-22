@@ -145,7 +145,7 @@ func main() {
 	}
 
 	connStr := fmt.Sprintf(
-		"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+		"host=%s port=%s user=%s password=%s dbname=%s sslmode=require",
 		os.Getenv("PGHOST"), os.Getenv("PGPORT"), os.Getenv("PGUSER"), os.Getenv("PGPASSWORD"), os.Getenv("PGDATABASE"),
 	)
 
@@ -159,7 +159,8 @@ func main() {
 
 	err = db.Ping()
 	if err != nil {
-		log.Fatal("Gagal koneksi DB:", err)
+		log.Printf("Gagal koneksi DB: %v", err)
+		return
 	}
 
 	fmt.Println("DATABASE IS CONNECTED!!!")
